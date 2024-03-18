@@ -192,7 +192,7 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'normal_user_auth',
+        'NAME': 'normal_user_austh',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'localhost',

@@ -49,7 +49,7 @@ class Notification(Model):
     to_user = models.ForeignKey(User, related_name='+',on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     title= models.CharField(max_length = 2000,null=1,blank=1) # This will be the heading of the notifications that eil be implemented on some of th e notifications
-    feed = models.ForeignKey('insta.Post', null=True, blank=True,on_delete=models.CASCADE)
+    # feed = models.ForeignKey('insta.Post', null=True, blank=True,on_delete=models.CASCADE)
     message = models.ForeignKey('chat.Message', null=True, blank=True,on_delete=models.CASCADE)
     notification_type = models.CharField(max_length=100,
                                          choices=NOTIFICATION_TYPES)
