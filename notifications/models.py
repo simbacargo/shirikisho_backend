@@ -46,7 +46,9 @@ class Notification(Model):
     
 
     from_user = models.ForeignKey(User, related_name='+',on_delete=models.CASCADE)
+    from_user = models.CharField(max_length = 2000,null=1,blank=1)
     to_user = models.ForeignKey(User, related_name='+',on_delete=models.CASCADE)
+    to_user = models.CharField(max_length = 2000,null=1,blank=1)
     date = models.DateTimeField(auto_now_add=True)
     title= models.CharField(max_length = 2000,null=1,blank=1) # This will be the heading of the notifications that eil be implemented on some of th e notifications
     # feed = models.ForeignKey('insta.Post', null=True, blank=True,on_delete=models.CASCADE)
