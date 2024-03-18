@@ -12,7 +12,7 @@ from django.utils.html import escape
 from config.settings import AUTH_USER_MODEL
 # Create your models here.
 User =AUTH_USER_MODEL
-class Notification(Model):
+class Notifications(Model):
     LIKED = 'L'
     COMMENTED = 'C'
     ALSO_COMMENTED = 'S'
@@ -134,3 +134,51 @@ class Notification(Model):
 
         else:
             return value
+        
+
+
+
+
+class Notification(Model):
+    LIKED = 'L'
+    COMMENTED = 'C'
+    ALSO_COMMENTED = 'S'
+    FOLLOWED = 'F' 
+    TEXTED = 'TEXTED' 
+    UNFOLLOWED = 'U' 
+    REQUEST_FRIENDSHIPD = 'U' 
+    ACCEPT_FRIENDSHIPD = 'U' 
+    RESPONDED = 'R' # This will be used when a user has responded or reacted to somebody eles THING 
+    NOTIFICATION_TYPES = (
+        (LIKED, 'LIKED'),
+        (COMMENTED, 'COMMENTED'),
+        (ALSO_COMMENTED, 'ALSO_COMMENTED'),
+        (FOLLOWED, 'FOLLOWED'),
+        (UNFOLLOWED, 'UNFOLLOWED'),
+        (REQUEST_FRIENDSHIPD, 'REQUEST_FRIENDSHIPD'),
+        (ACCEPT_FRIENDSHIPD, 'ACCEPT_FRIENDSHIPD'),
+        (RESPONDED, 'RESPONDED'),
+        (TEXTED, 'TEXTED'),
+        )
+
+    _LIKED_TEMPLATE = '<a href="/{0}/">{1}</a>LIKED liked your post: <a href="/feeds/{2}/">{3}</a>'  # noqa: E501
+    _COMMENTED_TEMPLATE = '<a href="/{0}/">{1}</a>COMMENTED commented on your post: <a href="/feeds/{2}/">{3}</a>'  # noqa: E501
+    _ALSO_COMMENTED_TEMPLATE = '<a href="/{0}/">{1}</a>ALSO_COMMENTED commented on your post: <a href="/feeds/{2}/">{3}</a>'  # noqa: E501
+    _FOLLOWED_TEMPLATE = '<a href="/{0}/">{1}</a>FOLLOWED answered your question: <a href="/questions/{2}/">{3}</a>'  # noqa: E501
+    _UNFOLLOWED_TEMPLATE = '<a href="/{0}/">{1}</a>UNFOLLOWED accepted your answer: <a href="/questions/{2}/">{3}</a>'  # noqa: E501
+    _REQUEST_FRIENDSHIPD_TEMPLATE = '<a href="/{0}/">{1}</a>REQUEST_FRIENDSHIPD edited your article: <a href="/article/{2}/">{3}</a>'  # noqa: E501
+    _ACCEPT_FRIENDSHIPD_TEMPLATE = '<a href="/{0}/">{1}</a>ACCEPT_FRIENDSHIPD also commentend on the post: <a href="/feeds/{2}/">{3}</a>'  # noqa: E
+    _RESPONDED_TEMPLATE = '<a href="/{0}/">{1}</a>RESPONDED also commentend on the post: <a href="/feeds/{2}/">{3}</a>'  # noqa: E
+    _TEXTED_TEMPLATE = '<a href="/{0}/">{1}</a>has just texted you'  # noqa: E
+    
+
+    from_user = models.CharField(max_length = 2000,null=1,blank=1)
+    to_user = models.CharField(max_length = 2000,null=1,blank=1)
+    date = models.DateTimeField(auto_now_add=True)
+    title= models.CharField(max_length = 2000,null=1,blank=1) # This will be the heading of the notifications that eil be implemented on some of th e notifications
+    message= models.CharField(max_length = 2000,null=1,blank=1) # This will be the heading of the notifications that eil be implemented on some of th e notifications
+    notification_type = models.CharField(max_length=100,choices=NOTIFICATION_TYPES)
+    is_read = models.BooleanField(default=False)
+    is_new = models.BooleanField(default=False)
+    is_urgent = models.BooleanField(default=False)
+    is_recomendation = models.BooleanField(default=False)
