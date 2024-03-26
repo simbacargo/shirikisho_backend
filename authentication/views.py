@@ -8,6 +8,8 @@ from random import randint
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
 from .models.users import User
+from tasks import send_verification_text
+
 
 
 class UserSerializer(serializers.ModelSerializer):
